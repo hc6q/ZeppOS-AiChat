@@ -1,11 +1,10 @@
-version: "3.9"
-
 services:
   api:
-    image: registry.vpn/ai-chat-backend
+    image: ai-chat-backend:local
+    build: .
     restart: always
     healthcheck:
-      test: ["CMD", "curl", "-f", "127.0.0.1"]
+      test: ["CMD", "curl", "-f", "http://127.0.0.1/"]
       interval: 2m
       timeout: 10s
       retries: 5
@@ -18,16 +17,17 @@ services:
       - ./data:/app/data
 
   handler:
-    image: registry.vpn/ai-chat-backend
+    image: ai-chat-backend:local
     entrypoint: python -m ai_chat_handler
     restart: always
     environment:
       - REDIS_HOST=redis
+      - GEMINI_MODEL=${GEMINI_MODEL:-gemini-3.5-flash-lite}
     volumes:
       - ./data:/app/data
 
   redis:
-    image: redis
+    image: redis:7-alpine
     restart: always
     volumes:
       - ./data/redis:/data

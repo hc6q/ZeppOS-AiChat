@@ -1,5 +1,6 @@
 import asyncio
 import json
+import os
 
 import aiohttp
 from python_socks import ProxyConnectionError, ProxyError
@@ -9,7 +10,7 @@ from utils.log_tools import create_logger
 from utils.token_rotation_tools import AskGeminiRestart, generator_with_gemini_token, process_gemini_status
 
 log = create_logger("gemini_connection")
-default_model = "gemini-1.5-flash-latest"
+default_model = os.environ.get("GEMINI_MODEL", "gemini-3.5-flash-lite")
 
 
 @generator_with_gemini_token

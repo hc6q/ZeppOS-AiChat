@@ -1,8 +1,10 @@
-FROM python:3.11-alpine
+FROM python:3.12-slim
 
 WORKDIR /app
 
-RUN apk add --no-cache curl opus
+RUN apt-get update \
+    && apt-get install --no-install-recommends -y curl libopus0 \
+    && rm -rf /var/lib/apt/lists/*
 
 COPY requirements.txt /app
 RUN --mount=type=cache,target=/root/.cache/pip \
@@ -10,6 +12,5 @@ RUN --mount=type=cache,target=/root/.cache/pip \
 
 COPY . /app/
 ENV PYTHONPATH=/app
-RUN python /app/utils/patch_opuslib_alpine.py
 
-CMD ["gunicorn", "-b", "0.0.0.0:80",  "--worker-class", "gevent", "ai_chat_backend:app"]
+CMD ["gunicorn", "-b", "0.0.0.0:80", "--worker-class", "gevent", "ai_chat_backend:app"]

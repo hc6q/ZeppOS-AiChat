@@ -1,110 +1,340 @@
 {
-    "configVersion": "v3",
-    "app": {
-        "appId": 1029480,
-        "appName": "AI Chat",
-        "appType": "app",
-        "version": {
-            "code": 1,
-            "name": "2.2.0"
+  "configVersion": "v3",
+  "app": {
+    "appId": 1029480,
+    "appName": "AI Chat",
+    "appType": "app",
+    "version": {
+      "code": 1,
+      "name": "2.2.0"
+    },
+    "icon": "icon.png",
+    "vender": "zepp",
+    "description": "AI chat client for Zepp OS"
+  },
+  "includeAssets": {
+    "mzfw": "./node_modules/mzfw/assets",
+    "icon": "./assets/common/icon"
+  },
+  "includeRawAssets": {
+    "mzfw": "./node_modules/mzfw/assets_raw"
+  },
+  "defaultLanguage": "en-US",
+  "withBundleGlobals": true,
+  "permissions": [
+    "data:os.device.info",
+    "device:os.mic"
+  ],
+  "targetZeppOS": "1.0.0",
+  "targets": {
+    "modern": {
+      "targetZeppOS": "3.0.0",
+      "designWidth": 480,
+      "platforms": [
+        {
+          "name": "active",
+          "deviceSource": 8323328
         },
-        "icon": "icon.png",
-        "vender": "zepp",
-        "description": "empty app"
-    },
-    "includeAssets": {
-        "mzfw": "./node_modules/mzfw/assets",
-        "icon": "./assets/common/icon"
-    },
-    "includeRawAssets": {
-        "mzfw": "./node_modules/mzfw/assets_raw"
-    },
-    "defaultLanguage": "en-US",
-    "withBundleGlobals": true,
-    "permissions": [
-        "data:os.device.info",
-        "device:os.mic"
-    ],
-    "targetZeppOS": "1.0.0",
-    "targets": {
-        "modern": {
-            "targetZeppOS": "3.0.0",
-            "designWidth": 480,
-            "platforms": [
-                "active",
-                "balance",
-                "bip5unity",
-                "gtr4",
-                "gtr4le"
-            ],
-            "module": {
-                "page": {
-                    "pages": [
-                        "page/SplashScreen",
-                        "page/HomePageScreen",
-                        "page/NewsViewScreen",
-                        "page/PrivacyWarningScreen",
-                        "page/ChatViewScreen",
-                        "page/InputKeyboardScreen",
-                        "page/InputVoiceScreen",
-                        "page/SettingsScreen",
-                        "page/SettingsKeyboardScreen",
-                        "page/SettingsFontSizeScreen",
-                        "page/AboutScreen",
-                        "page/DonateScreen"
-                    ]
-                },
-                "//secondary-widget": {
-                    "widgets": [
-                        {
-                            "path": "secondary-widget/index",
-                            "icon": "icon.png",
-                            "name": "AI Chat",
-                            "runtime": {
-                                "type": "js"
-                            }
-                        }
-                    ]
-                },
-                "app-widget": {
-                    "widgets": [
-                        {
-                            "path": "app-widget/index",
-                            "icon": "icon.png",
-                            "name": "AI Chat",
-                            "runtime": {
-                                "type": "js"
-                            }
-                        }
-                    ]
-                },
-                "app-side": {
-                    "path": "app-side/index"
-                }
-            }
+        {
+          "name": "active",
+          "deviceSource": 8323329
         },
-        "legacy": {
-            "targetZeppOS": "1.0.0",
-            "designWidth": 480,
-            "platforms": [
-                "active_edge",
-                "bip5",
-                "trex_ultra",
-                "cheetah",
-                "cheetah_pro",
-                "cheetah_square",
-                "gtr_mini",
-                "gts4",
-                "gts4mini",
-                "falcon",
-                "band7",
-                "gtr3pro",
-                "gtr3",
-                "gts3",
-                "trex2",
-                "mi_band7"
-            ],
-            "moduleFrom": "modern"
+        {
+          "name": "balance",
+          "deviceSource": 8519936
+        },
+        {
+          "name": "balance",
+          "deviceSource": 8519937
+        },
+        {
+          "name": "balance",
+          "deviceSource": 8519939
+        },
+        {
+          "name": "bip5unity",
+          "deviceSource": 8782081
+        },
+        {
+          "name": "bip5unity",
+          "deviceSource": 8782088
+        },
+        {
+          "name": "bip5unity",
+          "deviceSource": 8782089
+        },
+        {
+          "name": "gtr4",
+          "deviceSource": 7930112
+        },
+        {
+          "name": "gtr4",
+          "deviceSource": 7930113
+        },
+        {
+          "name": "gtr4le",
+          "deviceSource": 7864577
         }
+      ],
+      "module": {
+        "page": {
+          "pages": [
+            "page/SplashScreen",
+            "page/HomePageScreen",
+            "page/NewsViewScreen",
+            "page/PrivacyWarningScreen",
+            "page/ChatViewScreen",
+            "page/InputKeyboardScreen",
+            "page/InputVoiceScreen",
+            "page/SettingsScreen",
+            "page/SettingsKeyboardScreen",
+            "page/SettingsFontSizeScreen",
+            "page/AboutScreen",
+            "page/DonateScreen"
+          ]
+        },
+        "//secondary-widget": {
+          "widgets": [
+            {
+              "path": "secondary-widget/index",
+              "icon": "icon.png",
+              "name": "AI Chat",
+              "runtime": {
+                "type": "js"
+              }
+            }
+          ]
+        },
+        "app-widget": {
+          "widgets": [
+            {
+              "path": "app-widget/index",
+              "icon": "icon.png",
+              "name": "AI Chat",
+              "runtime": {
+                "type": "js"
+              }
+            }
+          ]
+        },
+        "app-side": {
+          "path": "app-side/index"
+        }
+      }
+    },
+    "legacy": {
+      "targetZeppOS": "1.0.0",
+      "designWidth": 480,
+      "platforms": [
+        {
+          "name": "active_edge",
+          "deviceSource": 8388864
+        },
+        {
+          "name": "active_edge",
+          "deviceSource": 8388865
+        },
+        {
+          "name": "bip5",
+          "deviceSource": 8454400
+        },
+        {
+          "name": "bip5",
+          "deviceSource": 8454401
+        },
+        {
+          "name": "trex_ultra",
+          "deviceSource": 6553856
+        },
+        {
+          "name": "trex_ultra",
+          "deviceSource": 6553857
+        },
+        {
+          "name": "cheetah",
+          "deviceSource": 8192256
+        },
+        {
+          "name": "cheetah",
+          "deviceSource": 8192257
+        },
+        {
+          "name": "cheetah_pro",
+          "deviceSource": 8126720
+        },
+        {
+          "name": "cheetah_pro",
+          "deviceSource": 8126721
+        },
+        {
+          "name": "cheetah_square",
+          "deviceSource": 8257793
+        },
+        {
+          "name": "gtr_mini",
+          "deviceSource": 250
+        },
+        {
+          "name": "gtr_mini",
+          "deviceSource": 251
+        },
+        {
+          "name": "gts4",
+          "deviceSource": 7995648
+        },
+        {
+          "name": "gts4",
+          "deviceSource": 7995649
+        },
+        {
+          "name": "gts4mini",
+          "deviceSource": 246
+        },
+        {
+          "name": "gts4mini",
+          "deviceSource": 247
+        },
+        {
+          "name": "falcon",
+          "deviceSource": 414
+        },
+        {
+          "name": "falcon",
+          "deviceSource": 415
+        },
+        {
+          "name": "band7",
+          "deviceSource": 252
+        },
+        {
+          "name": "band7",
+          "deviceSource": 253
+        },
+        {
+          "name": "band7",
+          "deviceSource": 254
+        },
+        {
+          "name": "gtr3pro",
+          "deviceSource": 229
+        },
+        {
+          "name": "gtr3pro",
+          "deviceSource": 230
+        },
+        {
+          "name": "gtr3pro",
+          "deviceSource": 242
+        },
+        {
+          "name": "gtr3pro",
+          "deviceSource": 6095106
+        },
+        {
+          "name": "gtr3",
+          "deviceSource": 226
+        },
+        {
+          "name": "gtr3",
+          "deviceSource": 227
+        },
+        {
+          "name": "gts3",
+          "deviceSource": 224
+        },
+        {
+          "name": "gts3",
+          "deviceSource": 225
+        },
+        {
+          "name": "trex2",
+          "deviceSource": 418
+        },
+        {
+          "name": "trex2",
+          "deviceSource": 419
+        },
+        {
+          "name": "mi_band7",
+          "deviceSource": 260
+        },
+        {
+          "name": "mi_band7",
+          "deviceSource": 261
+        },
+        {
+          "name": "mi_band7",
+          "deviceSource": 262
+        },
+        {
+          "name": "mi_band7",
+          "deviceSource": 263
+        },
+        {
+          "name": "mi_band7",
+          "deviceSource": 264
+        },
+        {
+          "name": "mi_band7",
+          "deviceSource": 265
+        },
+        {
+          "name": "mi_band7",
+          "deviceSource": 266
+        }
+      ],
+      "module": {
+        "page": {
+          "pages": [
+            "page/SplashScreen",
+            "page/HomePageScreen",
+            "page/NewsViewScreen",
+            "page/PrivacyWarningScreen",
+            "page/ChatViewScreen",
+            "page/InputKeyboardScreen",
+            "page/InputVoiceScreen",
+            "page/SettingsScreen",
+            "page/SettingsKeyboardScreen",
+            "page/SettingsFontSizeScreen",
+            "page/AboutScreen",
+            "page/DonateScreen"
+          ]
+        },
+        "//secondary-widget": {
+          "widgets": [
+            {
+              "path": "secondary-widget/index",
+              "icon": "icon.png",
+              "name": "AI Chat",
+              "runtime": {
+                "type": "js"
+              }
+            }
+          ]
+        },
+        "app-widget": {
+          "widgets": [
+            {
+              "path": "app-widget/index",
+              "icon": "icon.png",
+              "name": "AI Chat",
+              "runtime": {
+                "type": "js"
+              }
+            }
+          ]
+        },
+        "app-side": {
+          "path": "app-side/index"
+        }
+      }
     }
+  },
+  "runtime": {
+    "apiVersion": {
+      "compatible": "1.0.0",
+      "target": "1.0.1",
+      "minVersion": "1.0.0"
+    }
+  }
 }

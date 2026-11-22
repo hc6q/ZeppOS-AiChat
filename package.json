@@ -1,7 +1,7 @@
 {
-    "name": "new",
+    "name": "zeppos-aichat",
     "version": "1.0.0",
-    "description": "",
+    "description": "AI chat application for Zepp OS devices",
     "main": "app.js",
     "module": true,
     "scripts": {
@@ -11,10 +11,10 @@
         "bridge": "zeusx bridge"
     },
     "author": "",
-    "license": "ISC",
+    "license": "GPL-3.0-or-later",
     "devDependencies": {
-        "@zeppos/device-types": "^3.0.0",
-        "mzfw": "file:../mzfw/packages/mzfw/mzfw-0.2.0.tgz",
+        "@zeppos/device-types": "^4.0.0",
+        "mzfw": "^0.2.2",
         "zosx": "^0.2.4"
     }
 }

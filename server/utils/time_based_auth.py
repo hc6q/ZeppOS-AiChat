@@ -10,19 +10,29 @@ from utils import secrets
 def _check_auth():
     key_arr = secrets["app_secret"]
     auth = request.headers.get("Authorization")
-    if auth is None or "Token" not in auth:
+    if auth is None:
+        return {"result": False, "error": "Please, update application."}, 401
+
+    scheme, separator, value = auth.partition(" ")
+    if scheme != "Token" or not separator or not value:
         return {"result": False, "error": "Please, update application."}, 401
 
     try:
-        token = int(auth.split(" ")[1])
-        assert token == get_tba_token(key_arr)
-    except (ValueError, AssertionError):
+        token = int(value)
+    except ValueError:
         return {"result": False, "error": "Validation failed, ensure that date and time are valid."}, 401
+
+    if token != get_tba_token(key_arr):
+        return {"result": False, "error": "Validation failed, ensure that date and time are valid."}, 401
+
+    return None
 
 
 def with_authorization(_func):
     def _inner(*args, **kwargs):
-        _check_auth()
+        auth_error = _check_auth()
+        if auth_error is not None:
+            return auth_error
         return _func(*args, **kwargs)
     _inner.__name__ = _func.__name__
     return _inner
@@ -30,7 +40,9 @@ def with_authorization(_func):
 
 def with_authorization_async(_func):
     async def _inner(*args, **kwargs):
-        _check_auth()
+        auth_error = _check_auth()
+        if auth_error is not None:
+            return auth_error
         return await _func(*args, **kwargs)
     _inner.__name__ = _func.__name__
     return _inner
