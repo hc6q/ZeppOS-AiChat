@@ -1,22 +1,20 @@
-version: "3.9"
-
 services:
   app:
-    image: registry.vpn/ai-chat-backend
+    image: ai-chat-backend:local
     build: .
     network_mode: host
     volumes:
       - ./data:/app/data
 
   handler:
-    image: registry.vpn/ai-chat-backend
+    image: ai-chat-backend:local
     entrypoint: python -m ai_chat_handler
     network_mode: host
     volumes:
       - ./data:/app/data
 
   redis:
-    image: redis
+    image: redis:7-alpine
     restart: always
     network_mode: host
     volumes:

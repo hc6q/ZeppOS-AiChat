@@ -92,25 +92,26 @@ def with_gemini_token(_func):
 
 async def process_gemini_status(response: ClientResponse, token):
     if response.status == 500:
-        log.info(f"Gemini status=500, data={await response.json()}")
+        log.info(f"Gemini status=500, data={await response.text()}")
         await statistics.increase_split_async("ai_chat", "error")
         await asyncio.sleep(10)
         raise AskGeminiRestart()
     elif response.status == 503:
         log.info("Gemini is overloaded, exit")
         await statistics.increase_split_async("ai_chat", "error")
-        return (await response.json())[0]
+        return await response.json()
     elif response.status == 429 or response.status == 403:
         body = await response.json()
-        if body[0]["error"]["status"] == "RESOURCE_EXHAUSTED":
+        error = body.get("error", {})
+        if error.get("status") == "RESOURCE_EXHAUSTED":
             rdb.set(f"ai:rate_limit_reached:{token}", 1)
             rdb.expire(f"ai:rate_limit_reached:{token}", 60)
-        elif body[0]["error"]["status"] == "PERMISSION_DENIED":
-            await send_notify("AIChat Gemini 403", body[0]["error"].get("message"))
+        elif error.get("status") == "PERMISSION_DENIED":
+            await send_notify("AIChat Gemini 403", error.get("message"))
             rdb.set(f"ai:rate_limit_reached:{token}", 1)
             rdb.expire(f"ai:rate_limit_reached:{token}", 3600)
         else:
-            log.info(f"Unknown 429 status", body["error"]["status"])
+            log.info("Unknown Gemini error status: %s", error.get("status", "unknown"))
             await asyncio.sleep(5)
         raise AskNewGeminiToken()
     elif response.status != 200:
